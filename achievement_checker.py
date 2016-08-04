@@ -6,13 +6,41 @@ __author__ = "Skatje Myers"
 import sys
 import xml.etree.ElementTree as ET
 import math
+import os
 
 args = sys.argv
-if len(args) < 2:
-	print('ERROR: Must specify save file:\npython achievement_checker.py <path_to_save_file>')
-	sys.exit()
+if len(args) == 2:
+	tree = ET.parse(args[1])
+elif os.name == 'posix':
+	path = os.path.expanduser('~/.config/StardewValley/Saves/')
+	saves = [x for x in os.listdir(path) if os.path.isdir(path + '/' + x)]
+	if len(saves) == 0:
+		print('ERROR: No save files found in ' + path)
+		sys.exit()
+	i = 0
+	if len(saves) > 1:
+		options = ''
+		for j in range(0, len(saves)):
+			options += '[' + str(j) + '] ' + saves[j] + '\n'
+		print('Choose save file [0-' + str(len(saves)-1) + ']:')
+		i = int(input(options))
+	tree = ET.parse(path + '/' + saves[i] + '/' + saves[i])
+else:
+	path = os.path.expanduser('~\\AppData\\Roaming\\StardewValley\\Saves')
+	saves = [x for x in os.listdir(path) if os.path.isdir(path + '\\' + x)]
+	if len(saves) == 0:
+		print('ERROR: No save files found in ' + path)
+		sys.exit()
+	i = 0
+	if len(saves) > 1:
+		options = ''
+		for j in range(0, len(saves)):
+			options += '[' + str(j) + '] ' + saves[j] + '\n'
+		print('Choose save file [0-' + str(len(saves)-1) + ']:')
+		i = int(input(options))
+	tree = ET.parse(path + '\\' + saves[i] + '\\' + saves[i])
 
-tree = ET.parse(args[1])
+
 player = tree.find('player')
 RED = '\033[31m'
 END = '\033[0m'
@@ -232,7 +260,7 @@ if skills[min_skill] < 10:
 	print('\t\tMissing:')
 	for skill in skills:
 		if skills[skill] < 10:
-			print('\t\t' + skill + ' (' + str(skills[skill]) + ')')
+			print('\t\t\t' + skill + ' (' + str(skills[skill]) + ')')
 if skills[max_skill] == 10 and skills[min_skill] == 10:
 	print('All skill achievements obtained.')
 
