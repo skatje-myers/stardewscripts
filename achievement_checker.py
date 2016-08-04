@@ -77,7 +77,7 @@ if len(caught_ids) < len(fish_ids.keys()):
 	missing = list(fish_ids.keys() - caught_ids)
 	missing = [fish_ids[id] for id in missing]
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-	blanks = len(split[0]) - len(split[3])
+	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
 		split[3].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
@@ -102,7 +102,7 @@ if len(cooked_recipes) < len(recipe_ids.keys()):
 	missing = list(recipe_ids.keys() - cooked_recipes)
 	missing = [recipe_ids[id] for id in missing]
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-	blanks = len(split[0]) - len(split[3])
+	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
 		split[3].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
@@ -127,7 +127,7 @@ if len(crafted) < len(craftable_items):
 	print('\t\tMissing:')
 	missing = list(craftable_items - crafted)
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-	blanks = len(split[0]) - len(split[3])
+	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
 		split[3].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
@@ -151,7 +151,7 @@ if len(museum_ids.keys() - donated) > 0:
 	missing = list(museum_ids.keys() - donated)
 	missing = [museum_ids[id] for id in missing]
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-	blanks = len(split[0]) - len(split[3])
+	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
 		split[3].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
@@ -186,7 +186,7 @@ if len(shipping_ids.keys() - shipped.keys()) > 0:
 	missing = list(shipping_ids.keys() - shipped)
 	missing = [shipping_ids[id] for id in missing]
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-	blanks = len(split[0]) - len(split[3])
+	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
 		split[3].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
@@ -200,7 +200,7 @@ if len(shipping_ids.keys() - shipped.keys()) > 0:
 		missing = list(crop_ids.keys() - shipped)
 		missing = [crop_ids[id] for id in missing]
 		split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
-		blanks = len(split[0]) - len(split[3])
+		blanks = len(split[0]) - len(split[-1])
 		if blanks > 0:
 			split[3].extend([' ' for i in range(blanks)])
 		for row in zip(*split):
