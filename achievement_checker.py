@@ -220,26 +220,28 @@ if len(shipping_ids.keys() - shipped.keys()) > 0:
 	for row in zip(*split):
 		print('\t\t\t' + ''.join(str.ljust(item, 20) for item in row))
 
-	if len(crop_ids.keys() - shipped) > 0:
-		print(RED + '\t*** Ship 15 of every crop ***' + END + '\n\t\tMissing:')
-		for crop in list(shipped_crops):
+	missing = []
+	for crop in list(crop_ids):
+		try:
 			if shipped_crops[crop] < 15:
-				del shipped_crops[crop]
-		missing = list(crop_ids.keys() - shipped)
-		missing = [crop_ids[id] for id in missing]
+				missing.append(crop_ids[crop])
+		except KeyError:
+			missing.append(crop_ids[crop])
+	if len(missing) > 0:
+		print(RED + '\t*** Ship 15 of every crop ***' + END + '\n\t\tMissing:')
 		split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
 		blanks = len(split[0]) - len(split[-1])
 		if blanks > 0:
 			split[3].extend([' ' for i in range(blanks)])
 		for row in zip(*split):
 			print('\t\t\t' + ''.join(str.ljust(item, 20) for item in row))
-	if len(shipped_crops) == 0:
-		print(RED + '\t*** Ship 300 of one crop ***' + END)
-	else:
+	if len(shipped_crops) > 0:
 		max_shipped = max(shipped_crops, key=shipped_crops.get)
 		if shipped_crops[max_shipped] < 300:
 			print(RED + '\t*** Ship 300 of one crop ***' + END)
-			print('\t\tHighest number: ' + max_shipped + ' (' + str(shipped_crops[max_shipped]) + ')')
+			print('\t\tHighest number: ' + crop_ids[max_shipped] + ' (' + str(shipped_crops[max_shipped]) + ')')
+	else:
+		print(RED + '\t*** Ship 300 of one crop ***' + END)
 else:
 	print('All shipping achievements obtained.')
 
