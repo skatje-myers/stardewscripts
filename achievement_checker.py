@@ -222,7 +222,7 @@ if len(shipping_ids.keys() - shipped.keys()) > 0:
 
 	if len(crop_ids.keys() - shipped) > 0:
 		print(RED + '\t*** Ship 15 of every crop ***' + END + '\n\t\tMissing:')
-		for crop in shipped_crops:
+		for crop in list(shipped_crops):
 			if shipped_crops[crop] < 15:
 				del shipped_crops[crop]
 		missing = list(crop_ids.keys() - shipped)
