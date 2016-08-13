@@ -332,9 +332,10 @@ if kids < 2:
 locations = tree.find('locations').findall('GameLocation')
 for location in locations:
 	if location.get('{http://www.w3.org/2001/XMLSchema-instance}type') == 'CommunityCenter':
-		if int(location.find('numberOfStarsOnPlaque').text) < 6:
-			print(RED + '\t*** Complete all community center bundles. ***' + END)
-		break
+		for bool in location.find('areasComplete').findall('boolean'):
+			if bool.text == 'false':
+				print(RED + '\t*** Complete all community center bundles. ***' + END)
+				break
 
 
 ## Joja Mart

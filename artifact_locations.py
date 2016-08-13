@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+"""artifact_locations.py: Check a Stardew Valley save file for how many dig spots are in each location. """
+
+__author__ = "Skatje Myers"
+
+import sys
+import os
+import xml.etree.ElementTree as ET
+
+args = sys.argv
+if len(args) == 2:
+	tree = ET.parse(args[1])
+elif os.name == 'posix':
+	path = os.path.expanduser('~/.config/StardewValley/Saves/')
+	saves = [x for x in os.listdir(path) if os.path.isdir(path + '/' + x)]
+	if len(saves) == 0:
+		print('ERROR: No save files found in ' + path)
+		sys.exit()
+	i = 0
+	if len(saves) > 1:
+		options = ''
+		for j in range(0, len(saves)):
+			options += '[' + str(j) + '] ' + saves[j] + '\n'
+		print('Choose save file [0-' + str(len(saves)-1) + ']:')
+		i = int(input(options))
+	tree = ET.parse(path + '/' + saves[i] + '/' + saves[i])
+else:
+	path = os.path.expanduser('~\\AppData\\Roaming\\StardewValley\\Saves')
+	saves = [x for x in os.listdir(path) if os.path.isdir(path + '\\' + x)]
+	if len(saves) == 0:
+		print('ERROR: No save files found in ' + path)
+		sys.exit()
+	i = 0
+	if len(saves) > 1:
+		options = ''
+		for j in range(0, len(saves)):
+			options += '[' + str(j) + '] ' + saves[j] + '\n'
+		print('Choose save file [0-' + str(len(saves)-1) + ']:')
+		i = int(input(options))
+	tree = ET.parse(path + '\\' + saves[i] + '\\' + saves[i])
+
+locations = tree.find('locations').findall('GameLocation')
+for location in locations:
+	items = location.find('objects').findall('item')
+	for item in items:
+		obj = item.find('value').find('Object')
+		if obj.find('Name').text == 'Artifact Spot':
+			print(location.get('{http://www.w3.org/2001/XMLSchema-instance}type'))
+			# You could print this out instead of you want the actual X,Y coordinates:
+			#x = obj.find('tileLocation').find('X').text
+			#y = obj.find('tileLocation').find('Y').text
+			#print(location.get('{http://www.w3.org/2001/XMLSchema-instance}type') + ': (' + x + ', '  + y + ')')
