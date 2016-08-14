@@ -46,7 +46,7 @@ def print_missing(missing):
 	split = [missing[i:math.ceil(i + len(missing) / 4)] for i in range(0, len(missing), math.ceil(len(missing) / 4))]
 	blanks = len(split[0]) - len(split[-1])
 	if blanks > 0:
-		split[3].extend([' ' for i in range(blanks)])
+		split[-1].extend([' ' for i in range(blanks)])
 	for row in zip(*split):
 		print('\t\t\t' + ''.join(str.ljust(item, 20) for item in row))
 
