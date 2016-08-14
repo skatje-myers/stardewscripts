@@ -379,8 +379,8 @@ def main():
 	for monster in monsters_killed:
 		name = monster.find('key').find('string').text
 		number = int(monster.find('value').find('int').text)
-		if name == 'Green Slime' or name == 'Big Slime' or name == 'Sludge' or name == 'Frost Jelly':
-			slime += number #TODO: why is this number 100 over what the game shows...?
+		if name == 'Green Slime' or name == 'Sludge' or name == 'Frost Jelly':
+			slime += number
 		if name == 'Bug' or name == 'Fly' or name == 'Grub':
 			bug += number
 		if name == 'Bat' or name == 'Frost Bat' or name == 'Lava Bat':
@@ -400,7 +400,7 @@ def main():
 		if slime < 1000:
 			print('\t\t\t' + str(slime) + '/1000 slimes.')
 		if void < 150:
-			print('\t\t\t' + str(void) + '/150 void spirits or shadow brutes.')
+			print('\t\t\t' + str(void) + '/150 void spirits.')
 		if bat < 200:
 			print('\t\t\t' + str(bat) + '/200 bats.')
 		if skeleton < 50:
