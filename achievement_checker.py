@@ -340,24 +340,25 @@ def main():
 		print('All shipping achievements obtained.')
 
 	print_heading('Skills')
-	skills = dict()
-	skills['Farming'] = int(player.find('farmingLevel').text)
-	skills['Mining'] = int(player.find('miningLevel').text)
-	skills['Combat'] = int(player.find('combatLevel').text)
-	skills['Foraging'] = int(player.find('foragingLevel').text)
-	skills['Fishing'] = int(player.find('fishingLevel').text)
-	max_skill = max(skills, key=skills.get)
-	min_skill = min(skills, key=skills.get)
-	if skills[max_skill] < 10:
+	skill_exp = dict()
+	exp = player.find('experiencePoints').findall('int')
+	skill_exp['Farming'] = int(exp[0].text)
+	skill_exp['Mining'] = int(exp[1].text)
+	skill_exp['Foraging'] = int(exp[2].text)
+	skill_exp['Fishing'] = int(exp[3].text)
+	skill_exp['Combat'] = int(exp[4].text)
+
+	max_skill = max(skill_exp, key=skill_exp.get)
+	min_skill = min(skill_exp, key=skill_exp.get)
+	if skill_exp[max_skill] < 15000:
 		print(RED + '\t*** Level 10 in a skill ***' + END)
-		print('\t\tCurrent top skill is ' + max_skill + ' (' + str(skills[max_skill]) + ')')
-	if skills[min_skill] < 10:
+	if skill_exp[min_skill] < 15000:
 		print(RED + '\t*** Level 10 in every skill ***' + END)
 		print('\t\tMissing:')
-		for skill in skills:
-			if skills[skill] < 10:
-				print('\t\t\t' + skill + ' (' + str(skills[skill]) + ')')
-	if skills[max_skill] == 10 and skills[min_skill] == 10:
+		for skill in skill_exp:
+			if skill_exp[skill] < 15000:
+				print('\t\t\t' + skill + ' (' + str(skill_exp[skill]) + '/15000)')
+	if skill_exp[min_skill] == '10':
 		print('All skill achievements obtained.')
 
 	print_heading('Other')
@@ -431,14 +432,14 @@ def main():
 					break
 
 
-				## Joja Mart
+	## Joja Mart
 
 
-				## Stardrops
+	## Stardrops
 
-				## Prairie King
-				# Beat prairie king
-				# beat prairie king without dying
+	## Prairie King
+	# Beat prairie king
+	# beat prairie king without dying
 
 
 if __name__ == "__main__":
