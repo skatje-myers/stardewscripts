@@ -77,7 +77,7 @@ def print_missing(missing, craftable_items, owned_items):
 				num = owned_ingredients[name]
 				print(name + ' (' + num + ')', end='')
 				if i == len(owned_ingredients) - 1:
-					print('' + END, end=' ')
+					print(', ' + END, end='')
 				else:
 					print(', ', end='')
 			for i in range(0, len(missing_ingredients)):
