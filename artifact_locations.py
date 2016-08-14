@@ -52,7 +52,8 @@ def main():
 		for item in items:
 			obj = item.find('value').find('Object')
 			if obj.find('Name').text == 'Artifact Spot':
-				print(location.get('{http://www.w3.org/2001/XMLSchema-instance}type'))
+				name = location.find('name').text
+				print(name)
 				# You could print this out instead of you want the actual X,Y coordinates:
 				#x = obj.find('tileLocation').find('X').text
 				#y = obj.find('tileLocation').find('Y').text
