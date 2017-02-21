@@ -14,6 +14,6 @@ These are little scripts I've written in the process of trying to obtain all of 
 
       ![artifact_locations](https://github.com/skatje-myers/stardewscripts/blob/master/screenshots/artifact_locations.png)
 
-All files can take as an argument the path to your save file, but if no arguments are given, it'll provide a menu to specify.
+All files can take as an argument the path to your save file, but if no arguments are given, it'll provide a menu to specify. Aside from artifact_locations.py, they all require Python 3+.
 
 Please report bugs!
