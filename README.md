@@ -1,4 +1,4 @@
-These are little scripts I've written in the process of trying to obtain all of the achievements in Stardew Valley. They are written to be entirely independent of one another.
+These are little scripts (in Python 3+) I've written in the process of trying to obtain all of the achievements in Stardew Valley. They are written to be entirely independent of one another.
 
 + **achievement_checker.py**: Checks which achievements the selected save file has obtained, and what's missing to complete them. Which crops have had less than 15 shipped, which fish haven't been caught, etc.
 
