@@ -130,7 +130,7 @@ def main():
 				name = item.find('Name')
 				if name is None:
 					continue
-				name = item.find('Name').text
+				name = name.text
 				num = int(item.find('stack').text)
 				if name not in owned_items:
 					owned_items[name] = 0
@@ -140,7 +140,10 @@ def main():
 			obj = item.find('value').find('Object')
 			if obj.get('{http://www.w3.org/2001/XMLSchema-instance}type') == 'Chest':
 				for item in obj.find('items').findall('Item'):
-					name = item.find('Name').text
+					name = item.find('Name')
+					if name is None:
+						continue
+					name = name.text
 					if name in fish:
 						name = 'Fish'
 					num = int(item.find('Stack').text)
