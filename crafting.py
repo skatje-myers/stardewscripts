@@ -127,6 +127,9 @@ def main():
 		if location.get('{http://www.w3.org/2001/XMLSchema-instance}type') == 'FarmHouse':
 			items = location.find('fridge').find('items').findall('Item')
 			for item in items:
+				name = item.find('Name')
+				if name is None:
+					continue
 				name = item.find('Name').text
 				num = int(item.find('stack').text)
 				if name not in owned_items:
