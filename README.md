@@ -9,8 +9,7 @@ These are little scripts (in Python 3+) I've written in the process of trying to
 + **cooking.py**: Same functionality as crafting.py, but for cooking recipes.
 ![cooking](/screenshots/cooking.png)
 
-+ **artifact_locations.py**: This prints the locations of the artifact dig spots ("worms"/"roots") for the day. It just prints "Desert", "BusStop", etc., but if you could uncomment the alternative print statements, it'll print the X,Y coordinates. You know, if you want to be even more of cheater.
-
++ **artifact_locations.py**: This prints the locations of the artifact dig spots ("worms"/"roots") for the day. It just prints "Desert", "BusStop", etc., but if you could uncomment the alternative print statements, it'll print the X,Y coordinates. You know, if you want to be even more of cheater.<br>
 ![artifact_locations](/screenshots/artifact_locations.png)
 
 All files can take as an argument the path to your save file, but if no arguments are given, it'll provide a menu to specify. Aside from artifact_locations.py, they all require Python 3+.
