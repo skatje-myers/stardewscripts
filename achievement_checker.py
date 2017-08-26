@@ -160,7 +160,7 @@ def main():
 				  '609': 'Radish Salad', '230': 'Red Plate', '222': 'Rhubarb Pie', '232': 'Rice Pudding',
 				  '607': 'Roasted Hazelnuts', '244': 'Roots Platter', '196': 'Salad', '212': 'Salmon Dinner',
 				  '227': 'Sashimi', '224': 'Spaghetti', '606': 'Stir Fry', '203': 'Strange Bun', '239': 'Stuffing',
-				  '237': 'Super Meal', '241': 'Survival Burger', '480': 'Tomato Seeds', '229': 'Tortilla',
+				  '237': 'Super Meal', '241': 'Survival Burger', '229': 'Tortilla',
 				  '219': 'Trout Soup', '200': 'Vegetable Medley'}
 	known_recipes = set()
 	cooked_recipes = set()
@@ -343,9 +343,9 @@ def main():
 	skill_exp = dict()
 	exp = player.find('experiencePoints').findall('int')
 	skill_exp['Farming'] = int(exp[0].text)
-	skill_exp['Mining'] = int(exp[1].text)
+	skill_exp['Fishing'] = int(exp[1].text)
 	skill_exp['Foraging'] = int(exp[2].text)
-	skill_exp['Fishing'] = int(exp[3].text)
+	skill_exp['Mining'] = int(exp[3].text)
 	skill_exp['Combat'] = int(exp[4].text)
 
 	max_skill = max(skill_exp, key=skill_exp.get)
