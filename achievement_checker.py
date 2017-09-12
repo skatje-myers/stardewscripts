@@ -121,7 +121,7 @@ def main():
 				'131': 'Sardine', '165': 'Scorpion Carp', '154': 'Sea Cucumber', '706': 'Shad', '720': 'Shrimp',
 				'136': 'Smallmouth Bass', '721': 'Snail', '151': 'Squid', '158': 'Stonefish', '698': 'Sturgeon',
 				'145': 'Sunfish', '155': 'Super Cucumber', '699': 'Tiger Trout', '701': 'Tilapia', '130': 'Tuna',
-				'140': 'Walleye', '734': 'Woodskip'}
+				'140': 'Walleye', '734': 'Woodskip', '795': 'Void Salmon', '796': 'Slimejack' }
 	caught_ids = set()
 	num_caught = 0
 	for item in player.find('fishCaught').findall('item'):
@@ -139,7 +139,7 @@ def main():
 		print('\t\tMissing:')
 		missing = list(fish_ids.keys() - caught_ids)
 		missing = [fish_ids[id] for id in missing]
-		print_missing(missing)
+		print_missing(sorted(missing))
 	if num_caught >= 100 and len(caught_ids) == len(fish_ids.keys()):
 		print('All fishing achievements obtained.')
 
@@ -182,13 +182,13 @@ def main():
 		unknown_missing = list(unknown_missing)
 		if len(known_missing) > 0:
 			print('\t\tMissing (recipe known):')
-			print_missing(known_missing)
+			print_missing(sorted(known_missing))
 		if len(unknown_missing) > 0:
 			print('\t\tMissing (recipe unknown):')
-			print_missing(unknown_missing)
+			print_missing(sorted(unknown_missing))
 
 	print_heading('Craftables')
-	craftable_items = {'Bomb', 'Cherry Bomb', 'Crab Pot', 'Explosive Ammo', 'Field Snack', 'Gate', 'Hardwood Fence', 'Iridium Sprinkler', 'Iron Fence', 'Jack-O-Lantern', 'Mega Bomb', 'Quality Sprinkler', 'Sprinkler', 'Stone Fence', 'Torch', 'Wood Fence', 'Cobblestone Path', 'Crystal Floor', 'Crystal Path', 'Drum Block', 'Flute Block', 'Gravel Path', 'Stepping Stone Path', 'Stone Floor', 'Straw Floor', 'Weathered Floor', 'Wood Floor', 'Wood Path', 'Basic Fertilizer', 'Basic Retaining Soil', 'Deluxe Speed-Gro', 'Quality Fertilizer', 'Quality Retaining Soil', 'Bee House', 'Oil Maker', 'Preserves Jar', 'Staircase', 'Loom', 'Mayonnaise Machine', 'Seed Maker', 'Transmute (Fe)', 'Cheese Press', 'Scarecrow', 'Furnace', 'Chest', 'Tapper', 'Keg', 'Rain Totem', 'Wild Seeds (Fa)', 'Marble Brazier', 'Iridium Band', 'Life Elixir', 'Trap Bobber', 'Slime Incubator', 'Sturdy Ring', 'Dressed Spinner', 'Lightning Rod', 'Speed-Gro', 'Wooden Brazier', 'Wood Lamp-post', 'Bait', 'Campfire', "Tub o' Flowers", 'Iron Lamp-post', 'Stump Brazier', 'Slime Egg-Press', 'Wild Seeds (Wi)', 'Ring of Yoba', 'Transmute (Au)', 'Skull Brazier', 'Wild Seeds (Su)', 'Crystalarium', 'Warp Totem: Mountains', 'Barbed Hook', 'Carved Brazier', 'Magnet', 'Worm Bin', 'Stone Brazier', 'Oil Of Garlic', 'Cork Bobber', 'Recycling Machine', 'Charcoal Kiln', 'Spinner', 'Wild Seeds (Sp)', 'Gold Brazier', 'Barrel Brazier', 'Warrior Ring', 'Ancient Seeds', 'Treasure Hunter', 'Warp Totem: Beach', 'Wicked Statue', 'Warp Totem: Farm', 'Wild Bait'}
+	craftable_items = {'Bomb', 'Cherry Bomb', 'Crab Pot', 'Explosive Ammo', 'Field Snack', 'Gate', 'Hardwood Fence', 'Iridium Sprinkler', 'Iron Fence', 'Jack-O-Lantern', 'Mega Bomb', 'Quality Sprinkler', 'Sprinkler', 'Stone Fence', 'Torch', 'Wood Fence', 'Cobblestone Path', 'Crystal Floor', 'Crystal Path', 'Drum Block', 'Flute Block', 'Gravel Path', 'Stepping Stone Path', 'Stone Floor', 'Straw Floor', 'Weathered Floor', 'Wood Floor', 'Wood Path', 'Basic Fertilizer', 'Basic Retaining Soil', 'Deluxe Speed-Gro', 'Quality Fertilizer', 'Quality Retaining Soil', 'Bee House', 'Oil Maker', 'Preserves Jar', 'Staircase', 'Loom', 'Mayonnaise Machine', 'Seed Maker', 'Transmute (Fe)', 'Cheese Press', 'Scarecrow', 'Furnace', 'Chest', 'Tapper', 'Keg', 'Rain Totem', 'Wild Seeds (Fa)', 'Marble Brazier', 'Iridium Band', 'Life Elixir', 'Trap Bobber', 'Slime Incubator', 'Sturdy Ring', 'Dressed Spinner', 'Lightning Rod', 'Speed-Gro', 'Wooden Brazier', 'Wood Lamp-post', 'Bait', 'Campfire', "Tub o' Flowers", 'Iron Lamp-post', 'Stump Brazier', 'Slime Egg-Press', 'Wild Seeds (Wi)', 'Ring of Yoba', 'Transmute (Au)', 'Skull Brazier', 'Wild Seeds (Su)', 'Crystalarium', 'Warp Totem: Mountains', 'Barbed Hook', 'Carved Brazier', 'Magnet', 'Worm Bin', 'Stone Brazier', 'Oil Of Garlic', 'Cork Bobber', 'Recycling Machine', 'Charcoal Kiln', 'Spinner', 'Wild Seeds (Sp)', 'Gold Brazier', 'Barrel Brazier', 'Warrior Ring', 'Ancient Seeds', 'Treasure Hunter', 'Warp Totem: Beach', 'Wicked Statue', 'Warp Totem: Farm', 'Wild Bait', 'Cask'}
 	crafted = set()
 	known_recipes = set()
 	for item in player.find('craftingRecipes').findall('item'):
@@ -210,10 +210,10 @@ def main():
 		unknown_missing = list(unknown_missing)
 		if len(known_missing) > 0:
 			print('\t\tMissing (recipe known):')
-			print_missing(known_missing)
+			print_missing(sorted(known_missing))
 		if len(unknown_missing) > 0:
 			print('\t\tMissing (recipe unknown):')
-			print_missing(unknown_missing)
+			print_missing(sorted(unknown_missing))
 
 	print_heading('Museum')
 	museum_ids = {'541': 'Aerinite', '538': 'Alamite', '66': 'Amethyst', '62': 'Aquamarine', '540': 'Baryte',
@@ -237,7 +237,7 @@ def main():
 				  '579': 'Prehistoric Scapula', '581': 'Prehistoric Skull', '580': 'Prehistoric Tibia',
 				  '115': 'Prehistoric Tool', '584': 'Prehistoric Vertebra', '108': 'Rare Disc', '112': 'Rusty Cog',
 				  '110': 'Rusty Spoon', '111': 'Rusty Spur', '582': 'Skeletal Hand', '585': 'Skeletal Tail',
-				  '126': 'Strange Doll', '127': 'Strange Doll', '589': 'Trilobite'}
+				  '126': 'Strange Doll (green)', '127': 'Strange Doll (yellow)', '589': 'Trilobite'}
 	donated = set()
 	locations = tree.find('locations').findall('GameLocation')
 	for location in locations:
@@ -253,7 +253,7 @@ def main():
 		print('\t\tMissing:')
 		missing = list(museum_ids.keys() - donated)
 		missing = [museum_ids[id] for id in missing]
-		print_missing(missing)
+		print_missing(sorted(missing))
 	else:
 		print('All museum achievements obtained.')
 
@@ -291,16 +291,17 @@ def main():
 					'417': 'Sweet Gem Berry', '787': 'Battery Pack', '330': 'Clay', '382': 'Coal', '334': 'Copper Bar',
 					'378': 'Copper Ore', '771': 'Fiber', '336': 'Gold Bar', '384': 'Gold Ore', '709': 'Hardwood',
 					'337': 'Iridium Bar', '386': 'Iridium Ore', '335': 'Iron Bar', '380': 'Iron Ore',
-					'338': 'Refined Quartz', '390': 'Stone', '388': 'Wood', '392': 'Nautilus Shell'}
+					'338': 'Refined Quartz', '390': 'Stone', '388': 'Wood', '392': 'Nautilus Shell',
+					'454': 'Ancient Fruit'}
 	crop_ids = {'300': 'Amaranth', '274': 'Artichoke', '188': 'Green Bean', '284': 'Beet', '258': 'Blueberry',
 				'278': 'Bok Choy', '190': 'Cauliflower', '270': 'Corn', '282': 'Cranberries', '272': 'Eggplant',
-				'595': 'Fairy Rose', '248': 'Garlic', '398': 'Grape', '304': 'Hops', '597': 'Blue Jazz', '250': 'Kale',
-				'254': 'Melon', '24': 'Parsnip', '260': 'Hot Pepper', '376': 'Poppy', '192': 'Potato', '276': 'Pumpkin',
-				'264': 'Radish', '266': 'Red Cabbage', '252': 'Rhubarb', '593': 'Summer Spangle', '268': 'Starfruit',
-				'400': 'Strawberry', '421': 'Sunflower', '417': 'Sweet Gem Berry', '256': 'Tomato', '591': 'Tulip',
-				'262': 'Wheat', '280': 'Yam'}
+				'248': 'Garlic', '398': 'Grape', '304': 'Hops', '250': 'Kale', '254': 'Melon', '24': 'Parsnip',
+				'260': 'Hot Pepper', '192': 'Potato', '276': 'Pumpkin', '264': 'Radish', '266': 'Red Cabbage',
+				'252': 'Rhubarb', '268': 'Starfruit', '400': 'Strawberry', '256': 'Tomato', '262': 'Wheat', '280': 'Yam'}
 	shipped = {}
 	shipped_crops = {}
+	shipping_achievs = 0
+
 	for item in player.find('basicShipped'):
 		id = item.find('key').find('int').text
 		num = int(item.find('value').find('int').text)
@@ -311,32 +312,38 @@ def main():
 		print(RED + '\t*** Ship every item ***' + END + '\n\t\tMissing:')
 		missing = list(shipping_ids.keys() - shipped)
 		missing = [shipping_ids[id] for id in missing]
-		print_missing(missing)
-
-		missing = []
-		for crop in list(crop_ids):
-			try:
-				if shipped_crops[crop] < 15:
-					missing.append(crop_ids[crop])
-			except KeyError:
-				missing.append(crop_ids[crop])
-		if len(missing) > 0:
-			print(RED + '\t*** Ship 15 of every crop ***' + END + '\n\t\tMissing:')
-			split = [missing[i:math.ceil(i + len(missing) / 4)] for i in
-					 range(0, len(missing), math.ceil(len(missing) / 4))]
-			blanks = len(split[0]) - len(split[-1])
-			if blanks > 0:
-				split[3].extend([' ' for i in range(blanks)])
-			for row in zip(*split):
-				print('\t\t\t' + ''.join(str.ljust(item, 20) for item in row))
-		if len(shipped_crops) > 0:
-			max_shipped = max(shipped_crops, key=shipped_crops.get)
-			if shipped_crops[max_shipped] < 300:
-				print(RED + '\t*** Ship 300 of one crop ***' + END)
-				print('\t\tHighest number: ' + crop_ids[max_shipped] + ' (' + str(shipped_crops[max_shipped]) + ')')
-		else:
-			print(RED + '\t*** Ship 300 of one crop ***' + END)
+		print_missing(sorted(missing))
 	else:
+		shipping_achievs += 1
+
+	missing = []
+	for crop in list(crop_ids):
+		try:
+			if shipped_crops[crop] < 15:
+				missing.append(crop_ids[crop])
+		except KeyError:
+			missing.append(crop_ids[crop])
+	if len(missing) > 0:
+		print(RED + '\t*** Ship 15 of every crop ***' + END + '\n\t\tMissing:')
+		split = [missing[i:math.ceil(i + len(missing) / 4)] for i in
+				 range(0, len(missing), math.ceil(len(missing) / 4))]
+		blanks = len(split[0]) - len(split[-1])
+		if blanks > 0:
+			split[3].extend([' ' for i in range(blanks)])
+		for row in zip(*split):
+				print('\t\t\t' + ''.join(str.ljust(item, 20) for item in row))
+	else:
+		shipping_achievs += 1
+
+	if len(shipped_crops) > 0:
+		max_shipped = max(shipped_crops, key=shipped_crops.get)
+		if shipped_crops[max_shipped] < 300:
+			print(RED + '\t*** Ship 300 of one crop ***' + END)
+			print('\t\tHighest number: ' + crop_ids[max_shipped] + ' (' + str(shipped_crops[max_shipped]) + ')')
+		else:
+			shipping_achievs += 1
+	
+	if shipping_achievs >= 3:
 		print('All shipping achievements obtained.')
 
 	print_heading('Skills')
@@ -358,7 +365,7 @@ def main():
 		for skill in skill_exp:
 			if skill_exp[skill] < 15000:
 				print('\t\t\t' + skill + ' (' + str(skill_exp[skill]) + '/15000)')
-	if skill_exp[min_skill] == '10':
+	if skill_exp[min_skill] >= 15000:
 		print('All skill achievements obtained.')
 
 	print_heading('Other')

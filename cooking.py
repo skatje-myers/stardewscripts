@@ -158,11 +158,11 @@ def main():
 
 	if len(unknown_missing) > 0:
 		print('Recipe unknown:')
-		print_missing(unknown_missing, recipes, owned_items)
+		print_missing(sorted(unknown_missing), recipes, owned_items)
 
 	if len(known_missing) > 0:
 		print('Recipe known:')
-		print_missing(known_missing, recipes, owned_items)
+		print_missing(sorted(known_missing), recipes, owned_items)
 
 
 if __name__ == "__main__":
